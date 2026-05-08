@@ -1,6 +1,7 @@
 # 🔬 AI Research Assistant
 
 An AI-powered research tool that generates structured summaries on any topic using **Google Gemini AI** and **Wikipedia**. Built with Python and Streamlit.
+
 Link - https://ai-research-assistant-by-tanay.streamlit.app
 ***
 
