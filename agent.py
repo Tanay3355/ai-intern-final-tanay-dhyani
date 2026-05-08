@@ -3,12 +3,10 @@ import os
 import requests
 from dotenv import load_dotenv
 from google import genai
-
-# Load API key from .env file
+import streamlit as st
 load_dotenv()
-
-# Create the Gemini client
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+api_key = os.getenv("GEMINI_API_KEY") or st.secrets.get("GEMINI_API_KEY")
+client = genai.Client(api_key=api_key)
 
 
 def get_wikipedia_content(topic: str) -> str:

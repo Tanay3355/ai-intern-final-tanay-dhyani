@@ -3,13 +3,11 @@ from agent import generate_research_summary
 from fpdf import FPDF
 import requests
 
-# --- Page Setup ---
 st.set_page_config(page_title="AI Research Assistant", page_icon="🔬")
 st.title("🔬 AI Research Assistant")
 st.write("Enter any research topic and get a structured summary powered by AI.")
 
-# --- Input Section ---
-topic = st.text_input("Enter your research topic:", placeholder="e.g. Black Holes, Diabetes, Climate Change")
+topic = st.text_input("Enter your research topic:")
 
 def get_wikipedia_content(topic: str) -> str:
     try:
@@ -35,26 +33,20 @@ def get_wikipedia_content(topic: str) -> str:
     except Exception as e:
         return f"Search error: {str(e)}"
 
-# --- Generate Button ---
 if st.button("Generate Research Summary"):
 
-    # Check if user typed something
     if not topic.strip():
         st.error("⚠️ Please enter a research topic before clicking Generate.")
     
     else:
-        # Show a loading spinner while generating
         with st.spinner("Researching and generating summary... please wait ⏳"):
             try:
-                # Call the agent to get the summary
                 wiki_context = get_wikipedia_content(topic)
                 summary = generate_research_summary(topic)
 
-                # Display the summary on screen
                 st.success("✅ Summary Generated!")
                 st.markdown(summary)
 
-                # --- Export as TXT ---
                 st.download_button(
                     label="⬇️ Download as .txt",
                     data=summary,
@@ -62,11 +54,9 @@ if st.button("Generate Research Summary"):
                     mime="text/plain"
                 )
 
-                # --- Export as PDF ---
                 pdf = FPDF()
                 pdf.add_page()
                 pdf.set_font("Arial", size=12)
-                # Clean special characters that fpdf can't handle
                 clean_summary = summary.encode("latin-1", errors="replace").decode("latin-1")
                 pdf.multi_cell(0, 10, clean_summary)
                 pdf_output = bytes(pdf.output())
