@@ -76,12 +76,6 @@ Open your browser at `http://localhost:8501`
 
 ***
 
-## 📸 Demo
-
-Enter any research topic (e.g. *Black Holes*, *Diabetes*, *Climate Change*) and click **Generate Research Summary** to get a structured AI-generated report instantly.
-
-***
-
 ## 📦 Requirements
 
 - Python 3.9+
